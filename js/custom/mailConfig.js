@@ -1,5 +1,5 @@
 (function () {
-  const ambienteProducao = false;
+  const ambienteProducao = true;
 
   // Inicializa o EmailJS com seu User ID
   emailjs.init("mV6vww1OlLV7b4G0k"); // Pegue isso no painel do EmailJS
