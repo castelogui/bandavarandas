@@ -47,16 +47,16 @@
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+        Navigation
+    --------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
     });
 
     /*------------------
-		Hero Slider
-	--------------------*/
+        Hero Slider
+    --------------------*/
     $('.hero__slider').owlCarousel({
         loop: true,
         dots: true,
@@ -162,6 +162,144 @@
     --------------------*/
     $('.video-popup').magnificPopup({
         type: 'iframe'
+    });
+
+    /*------------------
+        Image Popup with Slider
+    --------------------*/
+    $('.image-popup1').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true, // Ativa o modo de galeria
+            navigateByImgClick: true,
+            preload: [0, 2] // Pré-carrega as imagens próximas
+        },
+        mainClass: 'mfp-fade',
+        removalDelay: 300,
+        closeOnContentClick: true,
+        closeBtnInside: false,
+        zoom: {
+            enabled: true,
+            duration: 300
+        },
+        callbacks: {
+            open: function() {
+                // Ação ao abrir o popup
+                //console.log('Popup aberto');
+            },
+            close: function() {
+                // Ação ao fechar o popup
+                //console.log('Popup fechado');
+            }
+        }
+    });
+
+    $('.image-popup2').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true, // Ativa o modo de galeria
+            navigateByImgClick: true,
+            preload: [0, 2] // Pré-carrega as imagens próximas
+        },
+        mainClass: 'mfp-fade',
+        removalDelay: 300,
+        closeOnContentClick: true,
+        closeBtnInside: false,
+        zoom: {
+            enabled: true,
+            duration: 300
+        },
+        callbacks: {
+            open: function() {
+                // Ação ao abrir o popup
+                //console.log(this);
+            },
+            close: function() {
+                // Ação ao fechar o popup
+                //console.log('Popup fechado');
+            }
+        }
+    });
+
+    $('.image-popup3').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true, // Ativa o modo de galeria
+            navigateByImgClick: true,
+            preload: [0, 2] // Pré-carrega as imagens próximas
+        },
+        mainClass: 'mfp-fade',
+        removalDelay: 300,
+        closeOnContentClick: true,
+        closeBtnInside: false,
+        zoom: {
+            enabled: true,
+            duration: 300
+        },
+        callbacks: {
+            open: function() {
+                // Ação ao abrir o popup
+                //console.log(this);
+            },
+            close: function() {
+                // Ação ao fechar o popup
+                //console.log('Popup fechado');
+            }
+        }
+    });
+
+    $('.image-popup4').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true, // Ativa o modo de galeria
+            navigateByImgClick: true,
+            preload: [0, 2] // Pré-carrega as imagens próximas
+        },
+        mainClass: 'mfp-fade',
+        removalDelay: 300,
+        closeOnContentClick: true,
+        closeBtnInside: false,
+        zoom: {
+            enabled: true,
+            duration: 300
+        },
+        callbacks: {
+            open: function() {
+                // Ação ao abrir o popup
+                //console.log(this);
+            },
+            close: function() {
+                // Ação ao fechar o popup
+                //console.log('Popup fechado');
+            }
+        }
+    });
+
+    $('.image-popup5').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true, // Ativa o modo de galeria
+            navigateByImgClick: true,
+            preload: [0, 2] // Pré-carrega as imagens próximas
+        },
+        mainClass: 'mfp-fade',
+        removalDelay: 300,
+        closeOnContentClick: true,
+        closeBtnInside: false,
+        zoom: {
+            enabled: true,
+            duration: 300
+        },
+        callbacks: {
+            open: function() {
+                // Ação ao abrir o popup
+                //console.log(this);
+            },
+            close: function() {
+                // Ação ao fechar o popup
+                //console.log('Popup fechado');
+            }
+        }
     });
 
     /*------------------

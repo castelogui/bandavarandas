@@ -1242,6 +1242,57 @@ ol {
   opacity: 1;
 }
 
+.portfolio__item__media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+.portfolio__item__media img {
+  width: 100vw;
+  height: auto;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.hidden-images {
+  display: none; /* As imagens extras ficam ocultas até a galeria ser ativada */
+}
+
+/* Botão de expandir imagem */
+.portfolio__item__media .play-btn {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 20px;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+
+portfolio__item__media:hover .play-btn {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .portfolio__item__media img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
 .portfolio__item__video {
   height: 240px;
   display: -webkit-box;
