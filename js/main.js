@@ -302,6 +302,33 @@
         }
     });
 
+    $('.image-popup6').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true, // Ativa o modo de galeria
+            navigateByImgClick: true,
+            preload: [0, 2] // Pré-carrega as imagens próximas
+        },
+        mainClass: 'mfp-fade',
+        removalDelay: 300,
+        closeOnContentClick: true,
+        closeBtnInside: false,
+        zoom: {
+            enabled: true,
+            duration: 300
+        },
+        callbacks: {
+            open: function() {
+                // Ação ao abrir o popup
+                //console.log(this);
+            },
+            close: function() {
+                // Ação ao fechar o popup
+                //console.log('Popup fechado');
+            }
+        }
+    });
+
     /*------------------
         Counter
     --------------------*/
