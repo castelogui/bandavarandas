@@ -1397,11 +1397,20 @@ portfolio__item__media:hover .play-btn {
   color: #ffffff;
   height: 50px;
   width: 50px;
-  background: rgba(242, 242, 242, 0.1);
   line-height: 50px;
   text-align: center;
   display: inline-block;
   margin-right: 6px;
+}
+
+.inactive-page{
+  background: rgba(242, 242, 242, 0.1);
+  border-radius: 8px;
+}
+
+.active-page {
+  background: rgba(113, 13, 194, 0.445);
+  border-radius: 25px;
 }
 
 /*---------------------
@@ -1993,12 +2002,12 @@ portfolio__item__media:hover .play-btn {
     background: #222222;
   }
 
-  .slicknav_btn {
-    position: absolute;
-    right: 10px;
-    top: 26px;
-    background: #00bfe7;
-  }
+  /*.slicknav_btn {*/
+  /*  position: absolute;*/
+  /*  right: 10px;*/
+  /*  top: 26px;*/
+  /*  background: #a600e7;*/
+  /*}*/
 
   .header .container {
     position: relative;
@@ -2119,7 +2128,7 @@ portfolio__item__media:hover .play-btn {
     position: absolute;
     right: 10px;
     top: 26px;
-    background: #00bfe7;
+    background: #7f00e7;
   }
 
   .header .container {

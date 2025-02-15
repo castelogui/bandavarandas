@@ -12,24 +12,128 @@
 (function ($) {
 
     /*------------------
-        Preloader
+        Ao carregar a página
     --------------------*/
     $(window).on('load', function () {
+        initPreloader();
+        initPortfolioFilter();
+        initPortfolioGallery();
+        initPagination();
+    });
+
+    /*------------------
+        Preloader
+    --------------------*/
+    function initPreloader() {
         $(".loader").fadeOut();
         $("#preloder").delay(200).fadeOut("slow");
+    }
 
-        /*------------------
-            Portfolio filter
-        --------------------*/
+    /*------------------
+        Portfolio filter
+    --------------------*/
+    function initPortfolioFilter() {
         $('.portfolio__filter li').on('click', function () {
+            //$('.portfolio__filter li').removeClass('active');
+            //$(this).addClass('active');
             $('.portfolio__filter li').removeClass('active');
             $(this).addClass('active');
+    
+            let filter = $(this).data('filter');
+    
+            // Aplica o filtro no MixItUp
+            let mixer = mixitup('.portfolio__gallery', {
+                load: {
+                    filter: filter // Aplica o filtro selecionado
+                }
+            });
+    
+            // Aguarda a filtragem ser aplicada antes de atualizar a paginação
+            mixer.filter(filter).then(() => {
+                console.log(filter);
+                
+            });
         });
+    }
+
+    /*------------------
+        Portfolio galery
+    --------------------*/
+    function initPortfolioGallery() {
         if ($('.portfolio__gallery').length > 0) {
-            var containerEl = document.querySelector('.portfolio__gallery');
-            var mixer = mixitup(containerEl);
+            let containerEl = document.querySelector('.portfolio__gallery');
+            mixitup(containerEl);
         }
-    });
+    }
+
+    /*------------------
+        Pagination Logic
+    --------------------*/
+    function initPagination() {
+        let itemsPerPage = 6;
+        let currentPage = 1;
+        let items = $(".portfolio__item");
+        let totalPages = Math.ceil(items.length / itemsPerPage);
+
+        function showPage(page) {
+            items.hide();
+            let start = (page - 1) * itemsPerPage;
+            let end = start + itemsPerPage;
+            items.slice(start, end).fadeIn();
+
+            $(".pagination__option .number__pagination").removeClass("active-page");
+            $(".pagination__option .number__pagination").addClass("inactive-page");
+            $(".pagination__option .number__pagination").eq(page - 1).addClass("inactive-page");
+            $(".pagination__option .number__pagination").eq(page - 1).addClass("active-page");
+
+            $(".left__arrow").toggleClass("disabled", page === 1);
+            $(".right__arrow").toggleClass("disabled", page === totalPages);
+
+            window.scrollTo({
+                top: $(".breadcrumb__text").offset().top,
+                behavior: "smooth"
+            });
+        }
+
+        function createPagination() {
+            let pagination = $(".pagination__option");
+            pagination.empty();
+
+            pagination.append('<a href="#" class="arrow__pagination left__arrow"><span class="arrow_left"></span> Prev</a>');
+
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.append(`<a href="#" class="number__pagination">${i}</a>`);
+            }
+
+            pagination.append('<a href="#" class="arrow__pagination right__arrow">Next <span class="arrow_right"></span></a>');
+
+            $(".number__pagination").click(function (e) {
+                e.preventDefault();
+                currentPage = parseInt($(this).text());
+                showPage(currentPage);
+            });
+
+            $(".left__arrow").click(function (e) {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    showPage(currentPage);
+                }
+            });
+
+            $(".right__arrow").click(function (e) {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    showPage(currentPage);
+                }
+            });
+
+            showPage(currentPage);
+        }
+
+        createPagination();
+    }
 
     /*------------------
         Background Set
@@ -183,11 +287,11 @@
             duration: 300
         },
         callbacks: {
-            open: function() {
+            open: function () {
                 // Ação ao abrir o popup
                 //console.log('Popup aberto');
             },
-            close: function() {
+            close: function () {
                 // Ação ao fechar o popup
                 //console.log('Popup fechado');
             }
@@ -210,11 +314,11 @@
             duration: 300
         },
         callbacks: {
-            open: function() {
+            open: function () {
                 // Ação ao abrir o popup
                 //console.log(this);
             },
-            close: function() {
+            close: function () {
                 // Ação ao fechar o popup
                 //console.log('Popup fechado');
             }
@@ -237,11 +341,11 @@
             duration: 300
         },
         callbacks: {
-            open: function() {
+            open: function () {
                 // Ação ao abrir o popup
                 //console.log(this);
             },
-            close: function() {
+            close: function () {
                 // Ação ao fechar o popup
                 //console.log('Popup fechado');
             }
@@ -264,11 +368,11 @@
             duration: 300
         },
         callbacks: {
-            open: function() {
+            open: function () {
                 // Ação ao abrir o popup
                 //console.log(this);
             },
-            close: function() {
+            close: function () {
                 // Ação ao fechar o popup
                 //console.log('Popup fechado');
             }
@@ -291,11 +395,11 @@
             duration: 300
         },
         callbacks: {
-            open: function() {
+            open: function () {
                 // Ação ao abrir o popup
                 //console.log(this);
             },
-            close: function() {
+            close: function () {
                 // Ação ao fechar o popup
                 //console.log('Popup fechado');
             }
@@ -318,11 +422,11 @@
             duration: 300
         },
         callbacks: {
-            open: function() {
+            open: function () {
                 // Ação ao abrir o popup
                 //console.log(this);
             },
-            close: function() {
+            close: function () {
                 // Ação ao fechar o popup
                 //console.log('Popup fechado');
             }
