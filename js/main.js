@@ -16,8 +16,8 @@
     --------------------*/
     $(window).on('load', function () {
         initPreloader();
-        initPortfolioFilter();
         initPortfolioGallery();
+        initPortfolioFilter();
         initPagination();
     });
 
@@ -38,20 +38,19 @@
             //$(this).addClass('active');
             $('.portfolio__filter li').removeClass('active');
             $(this).addClass('active');
-    
+
             let filter = $(this).data('filter');
-    
+
             // Aplica o filtro no MixItUp
             let mixer = mixitup('.portfolio__gallery', {
                 load: {
                     filter: filter // Aplica o filtro selecionado
                 }
             });
-    
+
             // Aguarda a filtragem ser aplicada antes de atualizar a paginação
             mixer.filter(filter).then(() => {
-                console.log(filter);
-                
+                initPortfolioGallery(filter);
             });
         });
     }
@@ -59,21 +58,34 @@
     /*------------------
         Portfolio galery
     --------------------*/
-    function initPortfolioGallery() {
+    function initPortfolioGallery(filter) {
         if ($('.portfolio__gallery').length > 0) {
             let containerEl = document.querySelector('.portfolio__gallery');
             mixitup(containerEl);
+            if (!filter || filter == '*') {
+                let totalItems = containerEl.querySelectorAll('.portfolio__item').length
+                let items = $(".portfolio__item");
+                initPagination(totalItems, items);
+            } else {
+                let totalItems = containerEl.querySelectorAll(filter).length
+                let items = $(filter);
+                initPagination(totalItems, items);
+            }
         }
     }
 
     /*------------------
         Pagination Logic
     --------------------*/
-    function initPagination() {
+    function initPagination(totalItems, items) {
         let itemsPerPage = 6;
+        let totalPages = 0
+        if (totalItems) {
+            totalPages = Math.ceil(totalItems / itemsPerPage);
+        } else {
+            totalPages = Math.ceil(items.length / itemsPerPage);
+        }
         let currentPage = 1;
-        let items = $(".portfolio__item");
-        let totalPages = Math.ceil(items.length / itemsPerPage);
 
         function showPage(page) {
             items.hide();
