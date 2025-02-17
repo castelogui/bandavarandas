@@ -16,9 +16,8 @@
     --------------------*/
     $(window).on('load', function () {
         initPreloader();
-        initPortfolioGallery();
+        initPortfolioGallery('.mix');
         initPortfolioFilter();
-        initPagination();
     });
 
     /*------------------
@@ -41,17 +40,8 @@
 
             let filter = $(this).data('filter');
 
-            // Aplica o filtro no MixItUp
-            let mixer = mixitup('.portfolio__gallery', {
-                load: {
-                    filter: filter // Aplica o filtro selecionado
-                }
-            });
+            initPortfolioGallery(filter);
 
-            // Aguarda a filtragem ser aplicada antes de atualizar a paginação
-            mixer.filter(filter).then(() => {
-                initPortfolioGallery(filter);
-            });
         });
     }
 
@@ -60,38 +50,34 @@
     --------------------*/
     function initPortfolioGallery(filter) {
         if ($('.portfolio__gallery').length > 0) {
-            let containerEl = document.querySelector('.portfolio__gallery');
-            mixitup(containerEl);
-            if (!filter || filter == '*') {
-                let totalItems = containerEl.querySelectorAll('.portfolio__item').length
-                let items = $(".portfolio__item");
-                initPagination(totalItems, items);
-            } else {
-                let totalItems = containerEl.querySelectorAll(filter).length
-                let items = $(filter);
-                initPagination(totalItems, items);
-            }
+            let containerEl = $('.portfolio__gallery');
+            let items = !filter ? $(`.portfolio__item${filter}`) : $(`${filter}`);
+            let mixer = mixitup(containerEl, {
+                load: {
+                    filter: filter ? filter : '.all'
+                }
+            });
+            mixer.filter(filter).then(() => {
+                initPagination(items);
+            });
+
         }
     }
 
     /*------------------
         Pagination Logic
     --------------------*/
-    function initPagination(totalItems, items) {
+    function initPagination(items) {
         let itemsPerPage = 6;
-        let totalPages = 0
-        if (totalItems) {
-            totalPages = Math.ceil(totalItems / itemsPerPage);
-        } else {
-            totalPages = Math.ceil(items.length / itemsPerPage);
-        }
+        let totalPages = Math.ceil(items.length / itemsPerPage);
+
         let currentPage = 1;
 
         function showPage(page) {
-            items.hide();
             let start = (page - 1) * itemsPerPage;
             let end = start + itemsPerPage;
-            items.slice(start, end).fadeIn();
+            items.hide();
+            items.filter((index) => index >= start && index < end).fadeIn();
 
             $(".pagination__option .number__pagination").removeClass("active-page");
             $(".pagination__option .number__pagination").addClass("inactive-page");
