@@ -782,6 +782,12 @@ ol {
   bottom: 0;
 }
 
+@media (max-width: 768px) {
+  .team__item__text{
+    bottom: 0px;
+  }
+}
+
 /*---------------------
   Latest
 -----------------------*/
